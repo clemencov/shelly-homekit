@@ -47,6 +47,7 @@ class WindowCovering : public Component, public mgos::hap::Service {
   enum class ServiceType {
     WINDOW_COVERING = 0,  // Default HAP Window Covering
     WINDOW = 1,           // HAP Window service type
+    GARAGE_DOOR = 2,      // Behave like a shutter but advertise as a garage door
   };
 
   WindowCovering(int id, Input *in0, Input *in1, Output *out0, Output *out1,
@@ -136,6 +137,9 @@ class WindowCovering : public Component, public mgos::hap::Service {
   mgos::hap::Characteristic *tgt_pos_char_ = nullptr;
   mgos::hap::Characteristic *pos_state_char_ = nullptr;
   mgos::hap::Characteristic *obst_char_ = nullptr;
+  // Garage door characteristics
+  mgos::hap::Characteristic *cur_state_char_ = nullptr;
+  mgos::hap::Characteristic *tgt_state_char_ = nullptr;
 
   State state_ = State::kIdle;
   State tgt_state_ = State::kNone;
